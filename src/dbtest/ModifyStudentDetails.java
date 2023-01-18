@@ -295,8 +295,9 @@ public class ModifyStudentDetails extends javax.swing.JFrame {
                   //step2 create  the connection object  
                 Config cfg = new Config();
                 String user = cfg.getProperty("ORACLE_USERNAME");
+                user+= " as sysdba";
                 String pass = cfg.getProperty("ORACLE_PASSWORD");
-                Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",user,pass);
+                Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl",user,pass);
                 //step3 create the statement object  
                 PreparedStatement stmt=con.prepareStatement("update Students_Table set first_name=?, last_name=?,dob=?,gender=?,CGPA=?,address=?,email=? where id=?");  
                 //step4 execute query
@@ -352,8 +353,9 @@ public class ModifyStudentDetails extends javax.swing.JFrame {
               //step2 create  the connection object  
             Config cfg = new Config();
             String user = cfg.getProperty("ORACLE_USERNAME");
+            user+= " as sysdba";
             String pass = cfg.getProperty("ORACLE_PASSWORD");
-            Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",user,pass);
+            Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl",user,pass);
             //step3 create the statement object  
             String selectSQL = "SELECT id, first_name, last_name, dob, gender, CGPA, address, email FROM Students_Table WHERE id = ?";
 

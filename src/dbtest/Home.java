@@ -29,18 +29,19 @@ public class Home extends javax.swing.JFrame {
             //step2 create  the connection object  
             Config cfg = new Config();
             String user = cfg.getProperty("ORACLE_USERNAME");
+            user+= " as sysdba";
             String pass = cfg.getProperty("ORACLE_PASSWORD");
-            Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",user,pass);  
+            Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl",user,pass);  
             System.out.println("In loadSampleData()");    
             //step3 create the statement object  
             Statement stmt=con.createStatement();  
 
             //step4 execute query  
-            ResultSet rs=stmt.executeQuery("select * from Students_Table");
+            ResultSet rs=stmt.executeQuery("select * from STUDENTS_TABLE");
+            System.out.println(rs.getRow());
 
             while(jTable1.getRowCount() > 0)
             {
-             
                 ((DefaultTableModel)jTable1.getModel()).removeRow(0);
             }
             
@@ -48,6 +49,8 @@ public class Home extends javax.swing.JFrame {
 //            System.out.println("No. of columns: " + col);
            
             while(rs.next()){
+            	
+            	
                 Object[] rows = new Object[col];
                 for(int i=1; i <= col; i++){
                     rows[i-1] = rs.getObject(i);
